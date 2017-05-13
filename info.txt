@@ -1,0 +1,19 @@
+
+# HOW TO START A SERVER
+sudo ./server.sh -i 1 -r blan -p blan -M 10
+
+# RCON via CONSOLE
+rcon_password blan
+
+# EXEC ESL CONFIG
+rcon exec esl5on5
+
+# RESTART GAME 
+rcon mp_restartgame 1
+
+# CHANGE LEVEL
+rcon changelevel MAPID (de_dust)
+
+# RECORD DEMO
+tv_record "DEMONAME" 
+
