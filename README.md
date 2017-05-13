@@ -1,11 +1,12 @@
-# akl-docker
+# CS:GO Dockerfile
 
+Copyed from other repo + edit
 (Yet another) Dockerfile and start script for cs:go. Uses [LGSM](https://gameservermanagers.com/lgsm/csgoserver/) for installation and easy updates. Supports custom ip:port and source nat for outbound connections.
 
 ## Build
 
 ```
-# docker build -t "dregu/csgo:latest" .
+# docker build -t "svenahlfeld/csgo:latest" .
 ```
 
 This might take hours. You might want to edit your Dockerfile to change the timezone and whatnot.
@@ -49,4 +50,5 @@ Detach with Ctrl+P Ctrl+Q.
   $ vim serverfiles/csgo/cfg/csgo-server.cfg
   $ exit
 # docker restart CID
-```
+
+see info.txt for further info

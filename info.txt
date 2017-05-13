@@ -1,6 +1,6 @@
 
 # HOW TO START A SERVER
-sudo ./server.sh -i 1 -r blan -p blan -M 10
+See start Scripts
 
 # RCON via CONSOLE
 rcon_password blan
