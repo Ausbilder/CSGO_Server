@@ -2,5 +2,5 @@
 for i in {1..10}
 do
    sudo ./server.sh -i $i -r blan -p blan -M 4 -h "CS:GO 2on2 WAR #$i"
-	echo "Started CS:GO 3on3 ServerID $i"
+	echo "Started CS:GO 2on2 ServerID $i"
 done
