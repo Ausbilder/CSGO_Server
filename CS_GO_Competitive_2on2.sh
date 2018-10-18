@@ -1,6 +1,41 @@
 #!/bin/bash
-for i in {1..10}
+
+RCONPASSWORD=blan
+PASSWORD=blan
+TICKRATE=128
+MAP=de_dust
+MAPGROUP=mg_active
+MAXPLAYERS=4
+GAMEMODE=2
+GAMETYPE=0
+
+SERVERPORT=27015
+TVPORT=27020
+CLIENTPORT=27005
+
+
+for i in {1..15}
 do
-   sudo ./server.sh -i $i -r blan -p blan -M 4 -h "CS:GO 2on2 WAR #$i"
+PORTOFFSET=$((($i-1)*100))
+CSERVERPORT=$(($SERVERPORT+$PORTOFFSET))
+CTVPORT=$(($TVPORT+$PORTOFFSET))
+
+sudo docker run \
+	-d \
+	-p $CSERVERPORT:27015/tcp \
+	-p $CSERVERPORT:27015/udp \
+	-p $CTVPORT:27020/udp \
+	-p $CTVPORT:27020/tcp \
+	-e "SERVER_HOSTNAME='CS:GO 2on2 WAR #$i'" \
+	-e "SERVER_PASSWORD=$RCONPASSWORD" \
+	-e "RCON_PASSWORD=$PASSWORD" \
+	-e "TICKRATE=$TICKRATE" \
+	-e "GAME_TYPE=$GAMETYPE" \
+	-e "GAME_MODE=$GAMEMODE" \
+	-e "MAP=$MAP" \
+	-e "MAPGROUP=$MAPGROUP" \
+	-e "MAXPLAYERS=$MAXPLAYERS" \
+	--name csgo_2on2_$i \
+	csgo
 	echo "Started CS:GO 2on2 ServerID $i"
 done

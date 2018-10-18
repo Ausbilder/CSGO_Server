@@ -1,6 +1,41 @@
 #!/bin/bash
-for i in {21..22}
+
+RCONPASSWORD=
+PASSWORD=
+TICKRATE=128
+MAP=de_mirage
+MAPGROUP=mg_active
+MAXPLAYERS=24
+GAMEMODE=0
+GAMETYPE=0
+
+SERVERPORT=27015
+TVPORT=27020
+CLIENTPORT=27005
+
+
+for i in {1..2}
 do
-   sudo ./server.sh -i $i -r marodeur -M 24 -h "CS:GO 12on12 Public #$i" -o 0 -y 0
+PORTOFFSET=$((($i-1)*100))
+CSERVERPORT=$(($SERVERPORT+$PORTOFFSET))
+CTVPORT=$(($TVPORT+$PORTOFFSET))
+
+sudo docker run \
+	-d \
+	-p $CSERVERPORT:27015/tcp \
+	-p $CSERVERPORT:27015/udp \
+	-p $CTVPORT:27020/udp \
+	-p $CTVPORT:27020/tcp \
+	-e "SERVER_HOSTNAME='CS:GO 12on12 Pub #$i'" \
+	-e "SERVER_PASSWORD=$RCONPASSWORD" \
+	-e "RCON_PASSWORD=$PASSWORD" \
+	-e "TICKRATE=$TICKRATE" \
+	-e "GAME_TYPE=$GAMETYPE" \
+	-e "GAME_MODE=$GAMEMODE" \
+	-e "MAP=$MAP" \
+	-e "MAPGROUP=$MAPGROUP" \
+	-e "MAXPLAYERS=$MAXPLAYERS" \
+	--name csgo_12on12_$i \
+	csgo
 	echo "Started CS:GO 12on12 ServerID $i"
 done

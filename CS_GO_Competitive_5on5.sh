@@ -1,6 +1,41 @@
 #!/bin/bash
-for i in {11..20}
+
+RCONPASSWORD=blan
+PASSWORD=blan
+TICKRATE=128
+MAP=de_mirage
+MAPGROUP=mg_active
+MAXPLAYERS=10
+GAMEMODE=1
+GAMETYPE=0
+
+SERVERPORT=27015
+TVPORT=27020
+CLIENTPORT=27005
+
+
+for i in {16..25}
 do
-   sudo ./server.sh -i $i -r blan -p blan -M 10 -h "CS:GO 5on5 WAR #$i"
+PORTOFFSET=$((($i-1)*100))
+CSERVERPORT=$(($SERVERPORT+$PORTOFFSET))
+CTVPORT=$(($TVPORT+$PORTOFFSET))
+
+sudo docker run \
+	-d \
+	-p $CSERVERPORT:27015/tcp \
+	-p $CSERVERPORT:27015/udp \
+	-p $CTVPORT:27020/udp \
+	-p $CTVPORT:27020/tcp \
+	-e "SERVER_HOSTNAME='CS:GO 5on5 WAR #$i'" \
+	-e "SERVER_PASSWORD=$RCONPASSWORD" \
+	-e "RCON_PASSWORD=$PASSWORD" \
+	-e "TICKRATE=$TICKRATE" \
+	-e "GAME_TYPE=$GAMETYPE" \
+	-e "GAME_MODE=$GAMEMODE" \
+	-e "MAP=$MAP" \
+	-e "MAPGROUP=$MAPGROUP" \
+	-e "MAXPLAYERS=$MAXPLAYERS" \
+	--name csgo_5on5_$i \
+	csgo
 	echo "Started CS:GO 5on5 ServerID $i"
 done
