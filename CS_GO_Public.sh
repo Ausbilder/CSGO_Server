@@ -36,6 +36,6 @@ sudo docker run \
 	-e "MAPGROUP=$MAPGROUP" \
 	-e "MAXPLAYERS=$MAXPLAYERS" \
 	--name csgo_12on12_$i \
-	csgo
+	svenahlfeld/csgo:latest
 	echo "Started CS:GO 12on12 ServerID $i"
 done

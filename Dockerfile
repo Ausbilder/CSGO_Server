@@ -3,7 +3,7 @@
 #
 # https://github.com/GameServerManagers/LinuxGSM-Docker
 #
-FROM ubuntu:16.04
+FROM ubuntu:18.04
 
 EXPOSE 27015/tcp
 EXPOSE 27015/udp
@@ -60,7 +60,7 @@ RUN dpkg --add-architecture i386 && \
 		libgtk2.0-0:i386 \
 		libdbus-glib-1-2:i386 \
 		libnm-glib-dev:i386 \
-		vim \
+		nano \
 		sudo
 	
 ## Get Linux GameServerManagers
@@ -105,4 +105,5 @@ CMD sed -i "s/hostname.*/hostname $SERVER_HOSTNAME/" /home/lgsm/serverfiles/csgo
 sed -i "s/tv_name.*/tv_name '$SERVER_HOSTNAME GOTV'/" /home/lgsm/serverfiles/csgo/cfg/eslgotv.cfg && \
 sed -i "s/rcon_password.*/rcon_password $RCON_PASSWORD/" /home/lgsm/serverfiles/csgo/cfg/csgoserver.cfg && \
 sed -i "s/sv_password.*/sv_password $SERVER_PASSWORD/" /home/lgsm/serverfiles/csgo/cfg/csgoserver.cfg && \
+sed -i "s/sv_lan.*/sv_lan 1/" /home/lgsm/serverfiles/csgo/cfg/csgoserver.cfg && \
 ./serverfiles/srcds_run -game csgo -usercon -port 27015 +clientport 27005 +tv_port 27020 -tickrate $TICKRATE +map $MAP -maxplayers_override $MAXPLAYERS +mapgroup $MAPGROUP +game_mode $GAME_MODE +game_type $GAME_TYPE +servercfgfile csgoserver.cfg
