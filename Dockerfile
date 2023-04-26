@@ -117,7 +117,7 @@ RUN echo "**** Download linuxgsm.sh ****" \
     && chmod +x /home/linuxgsm/linuxgsm.sh \
     && bash /home/linuxgsm/linuxgsm.sh csgoserver
 
-RUN ./home/linuxgsm/csgoserver auto-install 
+RUN ./csgoserver auto-install 
 #&& ./csgoserver force-update && ./csgoserver validate
 
 # VOLUME FOR STORING RECORDS
