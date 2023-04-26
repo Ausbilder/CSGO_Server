@@ -110,7 +110,8 @@ RUN echo "**** Add linuxgsm user ****" \
 RUN echo "**** Download linuxgsm.sh ****" \
     && set -ex \
     && wget -O linuxgsm.sh https://linuxgsm.sh \
-    && chmod +x /linuxgsm.sh
+    && chmod +x /linuxgsm.sh \
+    && bash linuxgsm.sh csgoserver
 
 WORKDIR /home/linuxgsm
 ENV PATH=$PATH:/home/linuxgsm
