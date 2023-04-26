@@ -106,16 +106,16 @@ RUN echo "**** Add linuxgsm user ****" \
 #    && mkdir -p /opt/linuxgsm \
 #    && chown linuxgsm:linuxgsm /opt/linuxgsm
 
+WORKDIR /home/linuxgsm
+ENV PATH=$PATH:/home/linuxgsm
+USER linuxgsm
+
 ## Download linuxgsm.sh
 RUN echo "**** Download linuxgsm.sh ****" \
     && set -ex \
     && wget -O linuxgsm.sh https://linuxgsm.sh \
     && chmod +x /linuxgsm.sh \
     && bash linuxgsm.sh csgoserver
-
-WORKDIR /home/linuxgsm
-ENV PATH=$PATH:/home/linuxgsm
-USER linuxgsm
 
 RUN ./csgoserver auto-install 
 #&& ./csgoserver force-update && ./csgoserver validate
