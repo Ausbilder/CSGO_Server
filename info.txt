@@ -21,3 +21,13 @@ sudo docker stop CONTAINERID
 
 # CLEAN UP DOCKER
 sudo docker ps --filter status=dead --filter status=exited -aq | xargs sudo docker rm -v
+
+
+# Stop all running containers
+docker stop $(docker ps -a -q)
+
+# remove all running containers
+docker container prune
+
+# alles alles löschen / aufräumen
+docker system prune -a
