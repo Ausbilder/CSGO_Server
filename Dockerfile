@@ -86,7 +86,7 @@ RUN echo "**** Cleanup ****"  \
 
 ENV DEBIAN_FRONTEND noninteractive
 
-ARG USERNAME=lgsm
+ARG USERNAME=linuxgsm
 ARG USER_UID=1000
 ARG USER_GID=$USER_UID
 
@@ -112,24 +112,24 @@ RUN echo "**** Download linuxgsm.sh ****" \
     && wget -O linuxgsm.sh https://linuxgsm.sh \
     && chmod +x /linuxgsm.sh
 
-WORKDIR /home/lgsm
-ENV PATH=$PATH:/home/lgsm
-USER lgsm
+WORKDIR /home/linuxgsm
+ENV PATH=$PATH:/home/linuxgsm
+USER linuxgsm
 
 RUN ./csgoserver auto-install 
 #&& ./csgoserver force-update && ./csgoserver validate
 
 # VOLUME FOR STORING RECORDS
-VOLUME /home/lgsm/serverfiles/csgo/matches
+VOLUME /home/linuxgsm/serverfiles/csgo/matches
 
 # COPY CONFIG
-COPY config/* /home/lgsm/serverfiles/csgo/cfg/
+COPY config/* /home/linuxgsm/serverfiles/csgo/cfg/
 # COPY MAPS - CUSTOM MAPS
-COPY maps/* /home/lgsm/serverfiles/csgo/maps/
+COPY maps/* /home/linuxgsm/serverfiles/csgo/maps/
 
-CMD sed -i "s/hostname.*/hostname $SERVER_HOSTNAME/" /home/lgsm/serverfiles/csgo/cfg/csgoserver.cfg && \
-sed -i "s/tv_name.*/tv_name '$SERVER_HOSTNAME GOTV'/" /home/lgsm/serverfiles/csgo/cfg/eslgotv.cfg && \
-sed -i "s/rcon_password.*/rcon_password $RCON_PASSWORD/" /home/lgsm/serverfiles/csgo/cfg/csgoserver.cfg && \
-sed -i "s/sv_password.*/sv_password $SERVER_PASSWORD/" /home/lgsm/serverfiles/csgo/cfg/csgoserver.cfg && \
-sed -i "s/sv_lan.*/sv_lan 1/" /home/lgsm/serverfiles/csgo/cfg/csgoserver.cfg && \
+CMD sed -i "s/hostname.*/hostname $SERVER_HOSTNAME/" /home/linuxgsm/serverfiles/csgo/cfg/csgoserver.cfg && \
+sed -i "s/tv_name.*/tv_name '$SERVER_HOSTNAME GOTV'/" /home/linuxgsm/serverfiles/csgo/cfg/eslgotv.cfg && \
+sed -i "s/rcon_password.*/rcon_password $RCON_PASSWORD/" /home/linuxgsm/serverfiles/csgo/cfg/csgoserver.cfg && \
+sed -i "s/sv_password.*/sv_password $SERVER_PASSWORD/" /home/linuxgsm/serverfiles/csgo/cfg/csgoserver.cfg && \
+sed -i "s/sv_lan.*/sv_lan 1/" /home/linuxgsm/serverfiles/csgo/cfg/csgoserver.cfg && \
 ./serverfiles/srcds_run -game csgo -usercon -port 27015 +clientport 27005 +tv_port 27020 -tickrate $TICKRATE +map $MAP -maxplayers_override $MAXPLAYERS +mapgroup $MAPGROUP +game_mode $GAME_MODE +game_type $GAME_TYPE +servercfgfile csgoserver.cfg
