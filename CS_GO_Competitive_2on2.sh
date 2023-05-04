@@ -35,7 +35,7 @@ sudo docker run \
 	-e "MAP=$MAP" \
 	-e "MAPGROUP=$MAPGROUP" \
 	-e "MAXPLAYERS=$MAXPLAYERS" \
-	-e "TOKEN=${TOKEN[*]}
+	-e "TOKEN=${TOKEN[$i]} \
 	--name csgo_2on2_$i \
 	svenahlfeld/csgo:latest
 	echo "Started CS:GO 2on2 ServerID $i"
