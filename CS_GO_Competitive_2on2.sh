@@ -39,4 +39,6 @@ sudo docker run \
 	--name csgo_2on2_$i \
 	svenahlfeld/csgo:latest
 	echo "Started CS:GO 2on2 ServerID $i"
+	echo "Using GSLT ${TOKEN[$i]}"
+	
 done
