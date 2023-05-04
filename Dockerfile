@@ -132,5 +132,5 @@ CMD sed -i "s/hostname.*/hostname $SERVER_HOSTNAME/" /home/linuxgsm/serverfiles/
 sed -i "s/tv_name.*/tv_name '$SERVER_HOSTNAME GOTV'/" /home/linuxgsm/serverfiles/csgo/cfg/eslgotv.cfg && \
 sed -i "s/rcon_password.*/rcon_password $RCON_PASSWORD/" /home/linuxgsm/serverfiles/csgo/cfg/csgoserver.cfg && \
 sed -i "s/sv_password.*/sv_password $SERVER_PASSWORD/" /home/linuxgsm/serverfiles/csgo/cfg/csgoserver.cfg && \
-sed -i "s/sv_lan.*/sv_lan 1/" /home/linuxgsm/serverfiles/csgo/cfg/csgoserver.cfg && \
-./serverfiles/srcds_run -game csgo -usercon -port 27015 +clientport 27005 +tv_port 27020 -tickrate $TICKRATE +map $MAP -maxplayers_override $MAXPLAYERS +mapgroup $MAPGROUP +game_mode $GAME_MODE +game_type $GAME_TYPE +servercfgfile csgoserver.cfg
+# sed -i "s/sv_lan.*/sv_lan 1/" /home/linuxgsm/serverfiles/csgo/cfg/csgoserver.cfg && \
+./serverfiles/srcds_run -game csgo -usercon -port 27015 +clientport 27005 +tv_port 27020 -tickrate $TICKRATE +map $MAP -maxplayers_override $MAXPLAYERS +mapgroup $MAPGROUP +game_mode $GAME_MODE +game_type $GAME_TYPE +servercfgfile csgoserver.cfg +sv_setsteamaccount $TOKEN
