@@ -14,7 +14,18 @@ docker build -t "svenahlfeld/csgo:latest" .
 
 Edit the scripts to adjust number of required containers
 
+Deploy MACVLAN if needed
 
+# Docker network
+https://docs.docker.com/network/network-tutorial-macvlan/
+
+
+docker network create -d macvlan \
+  --subnet=195.43.80.0/23 \
+  --gateway=195.43.80.1 \
+  --ip-range 195.43.80.32/28 \
+  -o parent=eno1 \
+  my-macvlan-net
 
 ----------------------------
 
