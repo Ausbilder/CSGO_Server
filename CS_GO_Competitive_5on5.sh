@@ -1,7 +1,7 @@
 #!/bin/bash
 
-RCONPASSWORD=blan
-PASSWORD=blan
+RCONPASSWORD=XXX
+PASSWORD=XXX
 TICKRATE=128
 MAP=de_mirage
 MAPGROUP=mg_active
